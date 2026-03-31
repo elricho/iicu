@@ -32,3 +32,27 @@ main.go        # Entry point
 - All dates use ISO-8601 format (YYYY-MM-DD or full datetime)
 - Athlete ID "0" resolves to authenticated user in the API
 - Auth: config file → env var → flag override layering
+
+## Commands
+
+Run `iicu --help` to see all command groups. Each group supports `--help` for subcommand details.
+
+15 command groups: `athlete`, `activities`, `events`, `wellness`, `curves`, `workouts`, `training-plan`, `gear`, `sports`, `weather`, `routes`, `chat`, `custom-items`, `shared-events`, `config`.
+
+## Development
+
+```bash
+make build      # Build for local platform
+make test       # Run tests
+make build-all  # Cross-compile all platforms
+make install    # Install to $GOPATH/bin
+```
+
+## Testing
+
+- Unit tests: `go test ./... -v`
+- Integration tests require `IICU_API_KEY` and `IICU_ATHLETE_ID` env vars
+
+## Skill
+
+The Claude coaching skill is at `skill/intervals-icu-coaching.md`. It teaches Claude how to use `iicu` for coaching workflows.
