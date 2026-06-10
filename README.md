@@ -84,7 +84,7 @@ subcommands.
 
 ## AI coaching skill
 
-`skill/intervals-icu-coaching.md` is a Claude skill that teaches an agent how to
+`skill/intervals-icu-coaching.md` is an example Claude skill that teaches an agent how to
 use `iicu` for coaching workflows.
 
 ## Development
