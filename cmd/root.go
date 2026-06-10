@@ -34,6 +34,12 @@ func Execute() {
 	}
 }
 
+// SetVersion sets the version reported by `iicu --version`. Called from main
+// with the value injected at build time.
+func SetVersion(v string) {
+	rootCmd.Version = v
+}
+
 func init() {
 	cobra.OnInitialize(initConfig)
 

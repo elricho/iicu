@@ -1,0 +1,94 @@
+# .goreleaser.yaml — release config for the iicu CLI.
+# Docs: https://goreleaser.com   Run locally: goreleaser release --snapshot --clean
+version: 2
+
+project_name: iicu
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: iicu
+    main: .
+    binary: iicu
+    env:
+      - CGO_ENABLED=0 # pure Go — one job cross-compiles every target
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X main.version={{ .Version }}
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - id: iicu
+    formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+
+checksum:
+  name_template: checksums.txt
+  algorithm: sha256
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+
+# Auto-generates Casks/iicu.rb and commits it to the tap repo.
+# Requires a HOMEBREW_TAP_TOKEN secret with write access to elricho/homebrew-iicu.
+# (Cask, not formula: Homebrew formulae build from source; casks ship the
+# prebuilt binary, which is what we release.)
+homebrew_casks:
+  - name: iicu
+    repository:
+      owner: elricho
+      name: homebrew-iicu
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+    directory: Casks
+    homepage: "https://github.com/elricho/intervals-cli"
+    description: "CLI for the intervals.icu training platform"
+    license: MIT
+    commit_author:
+      name: goreleaser-bot
+      email: goreleaser@users.noreply.github.com
+    # The binary is unsigned, so macOS Gatekeeper quarantines it on download.
+    # Strip the quarantine attribute on install so `iicu` runs without a prompt.
+    hooks:
+      post:
+        install: |
+          if system_command("/usr/bin/xattr", args: ["-h"]).exit_status == 0
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/iicu"]
+          end
+
+# Auto-generates a Scoop manifest and commits it to the bucket repo.
+# Requires a SCOOP_BUCKET_TOKEN secret with write access to elricho/scoop-iicu.
+scoops:
+  - name: iicu
+    repository:
+      owner: elricho
+      name: scoop-iicu
+      token: "{{ .Env.SCOOP_BUCKET_TOKEN }}"
+    directory: bucket
+    homepage: "https://github.com/elricho/intervals-cli"
+    description: "CLI for the intervals.icu training platform"
+    license: MIT
+    commit_author:
+      name: goreleaser-bot
+      email: goreleaser@users.noreply.github.com
+
+release:
+  github:
+    owner: elricho
+    name: intervals-cli
