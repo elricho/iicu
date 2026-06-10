@@ -57,7 +57,7 @@ homebrew_casks:
       name: homebrew-iicu
       token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
     directory: Casks
-    homepage: "https://github.com/elricho/intervals-cli"
+    homepage: "https://github.com/elricho/iicu"
     description: "CLI for the intervals.icu training platform"
     license: MIT
     commit_author:
@@ -81,7 +81,7 @@ scoops:
       name: scoop-iicu
       token: "{{ .Env.SCOOP_BUCKET_TOKEN }}"
     directory: bucket
-    homepage: "https://github.com/elricho/intervals-cli"
+    homepage: "https://github.com/elricho/iicu"
     description: "CLI for the intervals.icu training platform"
     license: MIT
     commit_author:
@@ -91,4 +91,4 @@ scoops:
 release:
   github:
     owner: elricho
-    name: intervals-cli
+    name: iicu

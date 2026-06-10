@@ -1,13 +1,13 @@
 # install.ps1 — install the iicu CLI on Windows.
 #
-#   irm https://raw.githubusercontent.com/elricho/intervals-cli/main/install.ps1 | iex
+#   irm https://raw.githubusercontent.com/elricho/iicu/main/install.ps1 | iex
 #
 # Environment overrides:
 #   IICU_VERSION       install a specific tag (default: latest release)
 #   IICU_INSTALL_DIR   install location  (default: %LOCALAPPDATA%\Programs\iicu)
 $ErrorActionPreference = 'Stop'
 
-$Repo   = 'elricho/intervals-cli'
+$Repo   = 'elricho/iicu'
 $Binary = 'iicu'
 $InstallDir = if ($env:IICU_INSTALL_DIR) { $env:IICU_INSTALL_DIR }
               else { Join-Path $env:LOCALAPPDATA 'Programs\iicu' }

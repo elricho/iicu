@@ -1,14 +1,14 @@
 #!/usr/bin/env sh
 # install.sh — install the iicu CLI on macOS / Linux.
 #
-#   curl -fsSL https://raw.githubusercontent.com/elricho/intervals-cli/main/install.sh | sh
+#   curl -fsSL https://raw.githubusercontent.com/elricho/iicu/main/install.sh | sh
 #
 # Environment overrides:
 #   IICU_VERSION       install a specific tag (default: latest release)
 #   IICU_INSTALL_DIR   install location  (default: /usr/local/bin)
 set -eu
 
-REPO="elricho/intervals-cli"
+REPO="elricho/iicu"
 BINARY="iicu"
 INSTALL_DIR="${IICU_INSTALL_DIR:-/usr/local/bin}"
 

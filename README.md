@@ -17,7 +17,7 @@ brew install elricho/iicu/iicu
 **Install script:**
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/elricho/intervals-cli/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/elricho/iicu/main/install.sh | sh
 ```
 
 ### Windows
@@ -32,13 +32,13 @@ scoop install iicu
 **PowerShell script:**
 
 ```powershell
-irm https://raw.githubusercontent.com/elricho/intervals-cli/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/elricho/iicu/main/install.ps1 | iex
 ```
 
 ### Other options
 
 - **Go:** `go install github.com/elricho/iicu@latest`
-- **Manual:** download a binary from the [latest release](https://github.com/elricho/intervals-cli/releases/latest) and put it on your `PATH`.
+- **Manual:** download a binary from the [latest release](https://github.com/elricho/iicu/releases/latest) and put it on your `PATH`.
 - **From source:** `git clone` this repo, then `make install`.
 
 The install scripts honour `IICU_VERSION` (pin a specific tag) and `IICU_INSTALL_DIR` (change the install location).
